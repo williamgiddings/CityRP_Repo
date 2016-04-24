@@ -7,7 +7,7 @@ include("sh_sounds.lua")
 
 if CLIENT then
 	SWEP.DrawCrosshair = false
-	SWEP.PrintName = "SCOOT"
+	SWEP.PrintName = "SCOUT"
 	SWEP.CSMuzzleFlashes = true
 	SWEP.ViewModelMovementScale = 1
 	
@@ -15,7 +15,7 @@ if CLIENT then
 	killicon.Add("cw_famas_g2", "weaponicons/famas-k", Color(255, 80, 0, 150))
 	SWEP.SelectIcon = surface.GetTextureID("weaponicons/select/scoot-h")
 	
-	SWEP.MuzzleEffect = "swb_sniper"
+	SWEP.MuzzleEffect = "muzzleflash_6"
 	SWEP.PosBasedMuz = false
 	SWEP.SnapToGrip = true
 	SWEP.ShellScale = 0.55

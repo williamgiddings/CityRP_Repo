@@ -129,31 +129,6 @@ TEAM_COBRALEADER = arista.team.add("Cobra Leader", {
 	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_ILLEGAL_WEAPONS, CATEGORY_EXPLOSIVES},
 })
 
-TEAM_COBRASNIPER = arista.team.add("Cobra Sniper", {
-	color = Color(100, 155, 255, 255),
-	males = "models/player/ct_sas.mdl",
-	description = "Maintains the city and arrests criminals.",
-
-	commander = true,
-
-	salary = 750,
-	limit = 1,
-
-	access = "",
-
-	guns = {"arista_baton", "cw_mr96", "cw_bet_scoot", "cw_flash_grenade"},
-	ammo = {
-		pistol = 60,
-	},
-
-	group = {
-		gang = GANG_COBRA,
-		access = "",
-		level = 2,
-		group = GROUP_OFFICIALS,
-	},
-	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_ILLEGAL_WEAPONS, CATEGORY_EXPLOSIVES},
-})
 
 TEAM_COBRA = arista.team.add("Cobra", {
 	color = Color(100, 155, 255, 255),
@@ -215,7 +190,7 @@ TEAM_POLICEOFFICER = arista.team.add("Police Officer", {
 	officer = true,
 
 	salary = 250,
-	limit = 15,
+	limit = 6,
 
 	access = "deD",
 
@@ -362,7 +337,8 @@ TEAM_DOCTOR = arista.team.add("Doctor", {
 
 TEAM_MECHANIC = arista.team.add("Mechanic", {
 	color = Color(175, 175, 175, 255),
-	description = "Repairs damaged vehicles.",
+	males = "models\mechanic\mechanic_m_01.mdl"
+  description = "Repairs damaged vehicles.",
 
 	salary = 150,
 	limit = 3,
@@ -383,6 +359,7 @@ TEAM_MECHANIC = arista.team.add("Mechanic", {
 
 GROUP_UNDERGROUND	= arista.team.addGroup("The Underground", "Join the underground for more fun, but harsher treatment if caught.")
 GANG_UNDERGROUND	= arista.team.addGang(GROUP_UNDERGROUND, "The Underground", "models/player/Group03/male_07.mdl", "'Fuck the police!'")
+GANG_MAFIA = arista.team.addGang(GROUP_UNDERGROUND, "The Mafia", "models/player/Group03/male_07.mdl", "'Wherever there's opportunity, the mafia will be there.'")
 
 TEAM_BLACKMARKETDEALER = arista.team.add("Blackmarket Dealer", {
 	color = Color(125, 125, 125, 255),
@@ -435,6 +412,41 @@ TEAM_GANGSTER = arista.team.add("Gangster", {
 		group = GROUP_UNDERGROUND,
 	},
 })
+
+TEAM_MAFIA = arista.team.add("Mafia Goon", {
+	color = Color(127, 0, 0, 255),
+	description = "Members of the Mafia.",
+
+	salary = 140,
+	limit = 6,
+
+	access = "",
+
+	group = {
+		gang = GANG_MAFIA,
+		access = "",
+		level = 1,
+		group = GROUP_UNDERGROUND,
+	},
+})
+
+TEAM_MAFIABOSS = arista.team.add("Mafia Don", {
+	color = Color(127, 0, 0, 255),
+	description = "Leader of the Mafia.",
+
+	salary = 165,
+	limit = 1,
+
+	access = "",
+
+	group = {
+		gang = GANG_MAFIA,
+		access = "",
+		level = 1,
+		group = GROUP_UNDERGROUND,
+	},
+})
+
 
 
 -- Default job.
