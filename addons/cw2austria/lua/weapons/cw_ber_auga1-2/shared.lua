@@ -19,7 +19,7 @@ if CLIENT then
 	killicon.Add("cw_ber_auga1-2", "weaponicons/aug-k", Color(255, 80, 0, 150))
 	SWEP.SelectIcon = surface.GetTextureID("weaponicons/select/aug-h")
 	
-	SWEP.MuzzleEffect = "swb_rifle_med"
+	SWEP.MuzzleEffect = "muzzleflash_6"
 	SWEP.PosBasedMuz = false
 	SWEP.SnapToGrip = true
 	SWEP.ShellScale = 0.5
