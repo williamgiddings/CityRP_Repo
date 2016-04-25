@@ -288,8 +288,8 @@ TEAM_GUNDEAL = arista.team.add("Gun Dealer", {
 		level = 1,
 		group = GROUP_CIVILIANS,
 	},
-	canmake = {CATEGORY_VEHICLES, CATEGORY_CONTRABAND, CATEGORY_POLICE_WEAPONS, CATEGORY_WEAPONS, CATEGORY_AMMO}, -- I might change cop weapons here
-	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_EXPLOSIVES},
+	canmake = {CATEGORY_VEHICLES, CATEGORY_CONTRABAND, CATEGORY_POLICE_WEAPONS, CATEGORY_WEAPONS, CATEGORY_AMMO, CATEGORY_CIV_WEAPONS}, -- I might change cop weapons here
+	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_EXPLOSIVES, CATEGORY_POLICE_WEAPONS},
 })
 
 if (GM or GAMEMODE):GetPlugin("hungermod") then
@@ -308,7 +308,7 @@ TEAM_CHEF = arista.team.add("Chef", {
 		level = 1,
 		group = GROUP_CIVILIANS,
 	},
-	canmake = {CATEGORY_VEHICLES, CATEGORY_CONTRABAND, CATEGORY_FOOD, CATEGORY_ALCOHOL, CATEGORY_DRINKS},
+	canmake = {CATEGORY_VEHICLES, CATEGORY_FOOD, CATEGORY_ALCOHOL, CATEGORY_DRINKS},
 	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_ILLEGAL_WEAPONS, CATEGORY_EXPLOSIVES, CATEGORY_POLICE_WEAPONS},
 })
 end
@@ -331,14 +331,14 @@ TEAM_DOCTOR = arista.team.add("Doctor", {
 		level = 1,
 		group = GROUP_CIVILIANS,
 	},
-	canmake = {CATEGORY_VEHICLES, CATEGORY_CONTRABAND, CATEGORY_DRUGS},
+	canmake = {CATEGORY_VEHICLES, CATEGORY_DRUGS},
 	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_ILLEGAL_WEAPONS, CATEGORY_EXPLOSIVES, CATEGORY_POLICE_WEAPONS},
 })
 
 TEAM_MECHANIC = arista.team.add("Mechanic", {
 	color = Color(175, 175, 175, 255),
 	males = "models\mechanic\mechanic_m_01.mdl"
-  description = "Repairs damaged vehicles.",
+  	description = "Repairs damaged vehicles.",
 
 	salary = 150,
 	limit = 3,
@@ -353,7 +353,7 @@ TEAM_MECHANIC = arista.team.add("Mechanic", {
 		level = 1,
 		group = GROUP_CIVILIANS,
 	},
-	canmake = {CATEGORY_VEHICLES, CATEGORY_CONTRABAND},
+	canmake = {CATEGORY_VEHICLES},
 	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_ILLEGAL_WEAPONS, CATEGORY_EXPLOSIVES, CATEGORY_POLICE_WEAPONS},
 })
 
