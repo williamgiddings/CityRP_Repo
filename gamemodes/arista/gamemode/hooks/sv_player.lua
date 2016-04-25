@@ -55,6 +55,7 @@ function GM:PlayerBlacklisted(ply, kind, thing, time, reason, blacklister)
 		ply:holsterAll()
 		ply:blacklist(kind, CATEGORY_ILLEGAL_WEAPONS, time, reason, blacklister:Name())
 		ply:blacklist(kind, CATEGORY_POLICE_WEAPONS, time, reason, blacklister:Name())
+		ply:blacklist(kind, CATEGORY_CIV_WEAPONS, time, reason, blacklister:Name())
 	end
 end
 
@@ -68,6 +69,7 @@ function GM:PlayerUnBlacklisted(ply, kind, thing, unblacklister)
 	if kind == "cat" and thing == CATEGORY_WEAPONS then -- If they've been unblacklisted from using weapons category, we need to unblacklist them from every other one too.
 		ply:unBlacklist(kind, CATEGORY_ILLEGAL_WEAPONS)
 		ply:unBlacklist(kind, CATEGORY_POLICE_WEAPONS)
+		ply:unBlacklist(kind, CATEGORY_CIV_WEAPONS)
 	end
 end
 
