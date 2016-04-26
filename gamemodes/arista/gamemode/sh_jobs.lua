@@ -335,7 +335,7 @@ TEAM_DOCTOR = arista.team.add("Doctor", {
 
 TEAM_MECHANIC = arista.team.add("Mechanic", {
 	color = Color(175, 175, 175, 255),
-	males = "models\mechanic\mechanic_m_01.mdl"
+	males = "models/mechanic/mechanic_m_01.mdl",
   	description = "Repairs damaged vehicles.",
 
 	salary = 150,
@@ -435,7 +435,7 @@ TEAM_MAFIABOSS = arista.team.add("Mafia Don", {
 	salary = 165,
 	limit = 1,
 
-	access = "",
+	access = "bdgeD",
 
 	group = {
 		gang = GANG_MAFIA,
