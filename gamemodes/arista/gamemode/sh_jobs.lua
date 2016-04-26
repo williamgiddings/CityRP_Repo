@@ -99,7 +99,7 @@ TEAM_VICEMAYOR = arista.team.add("Vice-Mayor", {
 	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_ILLEGAL_WEAPONS, CATEGORY_EXPLOSIVES},
 })
 
-GANG_COBRA			= arista.team.addGang(GROUP_OFFICIALS, "The Cobra", "models/player/riot.mdl", "Less talk, even more action!")
+GANG_COBRA = arista.team.addGang(GROUP_OFFICIALS, "The Cobra", "models/player/riot.mdl", "Less talk, even more action!")
 
 TEAM_COBRALEADER = arista.team.add("Cobra Leader", {
 	color = Color(100, 155, 255, 255),
@@ -336,8 +336,17 @@ TEAM_DOCTOR = arista.team.add("Doctor", {
 
 TEAM_MECHANIC = arista.team.add("Mechanic", {
 	color = Color(175, 175, 175, 255),
+<<<<<<< HEAD
+<<<<<<< HEAD
+	males = "models\mechanic\mechanic_m_01.mdl",
+    description = "Repairs damaged vehicles.",
+=======
+	males = "models\mechanic\mechanic_m_01.mdl"
+=======
 	males = "models/mechanic/mechanic_m_01.mdl",
+>>>>>>> 8ca0190615a599e7ce3d6cfa0c72740f8c8fd9d0
   	description = "Repairs damaged vehicles.",
+>>>>>>> 7851894edca830b42dc61879da2e5b1cdcc1bb8d
 
 	salary = 150,
 	limit = 2,
@@ -358,7 +367,7 @@ TEAM_MECHANIC = arista.team.add("Mechanic", {
 
 GROUP_UNDERGROUND	= arista.team.addGroup("The Underground", "Join the underground for more fun, but harsher treatment if caught.")
 GANG_UNDERGROUND	= arista.team.addGang(GROUP_UNDERGROUND, "The Underground", "models/player/Group03/male_07.mdl", "'Fuck the police!'")
-GANG_MAFIA = arista.team.addGang(GROUP_UNDERGROUND, "The Mafia", "models/player/Group03/male_07.mdl", "'Wherever there's opportunity, the mafia will be there.'")
+GANG_MAFIA          = arista.team.addGang(GROUP_UNDERGROUND, "The Mafia", "models/player/Group03/male_07.mdl", "'Wherever there's opportunity, the mafia will be there.'")
 
 TEAM_BLACKMARKETDEALER = arista.team.add("Blackmarket Dealer", {
 	color = Color(125, 125, 125, 255),

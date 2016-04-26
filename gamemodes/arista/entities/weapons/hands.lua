@@ -122,6 +122,8 @@ function SWEP:Reload()
 		self.Owner:notify("You raise your fists...")
 		self.raiseFists = true
 	end
+end
+
 function SWEP:PrimaryAttack(right)
 	if self.raiseFists == true then
 		self:SetNextPrimaryFire(CurTime() + self.Primary.Refire)
