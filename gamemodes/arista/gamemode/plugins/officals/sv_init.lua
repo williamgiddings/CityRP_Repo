@@ -18,6 +18,7 @@ function PLUGIN:LoadData()
 	self.tax = arista.config.plugins.officalsDefaultTax
 end
 
+
 --Check if they're the right group/gang
 function PLUGIN:IsAuthorised(player, ingang)
 	if not self.mayor then self:LoadData() end
