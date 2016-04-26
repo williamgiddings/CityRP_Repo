@@ -2,7 +2,6 @@ AddCSLuaFile()
 
 --[[
 Example of how to do a job:
-
 TEAM_POLICEOFFICER = arista.team.add("Police Officer", {
 	color = Color(100, 155, 255, 255), -- Color of job in scoreboard and chat.
 	males = "models/player/riot.mdl", -- Male models, can be a string, table or nil. If nil uses citizen models.
@@ -40,7 +39,6 @@ d = demote members of lower level. Restricted to a gang if used on a gang member
 g = can give/take ents to/from gang
 D = underlings can vote to depose
 M = All group-to-group transitions must go through this.
-
 Old format:
 (name,color,males,females,group,description,salary,limit,access,blacklist,canmake,cantuse,time,guns,ammo)
 ]]
