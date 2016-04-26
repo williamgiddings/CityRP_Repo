@@ -277,6 +277,7 @@ TEAM_GUNDEAL = arista.team.add("Gun Dealer", {
 	description = "The owner of a gun store.",
 
 	salary = 220,
+  limit= 2,
 
 	access = "",
 
@@ -296,7 +297,7 @@ TEAM_CHEF = arista.team.add("Chef", {
 	description = "Sells food to the city's inhabitants.",
 
 	salary = 220,
-	limit = 5,
+	limit = 3,
 
 	access = "",
 
@@ -319,7 +320,7 @@ TEAM_DOCTOR = arista.team.add("Doctor", {
 	females = "models/player/Group03m/Female_02.mdl",
 
 	salary = 250,
-	limit = 5,
+	limit = 1,
 
 	access = "h",
 
@@ -336,15 +337,19 @@ TEAM_DOCTOR = arista.team.add("Doctor", {
 TEAM_MECHANIC = arista.team.add("Mechanic", {
 	color = Color(175, 175, 175, 255),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	males = "models\mechanic\mechanic_m_01.mdl",
     description = "Repairs damaged vehicles.",
 =======
 	males = "models\mechanic\mechanic_m_01.mdl"
+=======
+	males = "models/mechanic/mechanic_m_01.mdl",
+>>>>>>> 8ca0190615a599e7ce3d6cfa0c72740f8c8fd9d0
   	description = "Repairs damaged vehicles.",
 >>>>>>> 7851894edca830b42dc61879da2e5b1cdcc1bb8d
 
 	salary = 150,
-	limit = 3,
+	limit = 2,
 
 	access = "",
 
@@ -369,7 +374,7 @@ TEAM_BLACKMARKETDEALER = arista.team.add("Blackmarket Dealer", {
 	description = "Supplys people with goods not found in the public market.",
 
 	salary = 100,
-	limit = 4,
+	limit = 2,
 
 	access = "",
 
