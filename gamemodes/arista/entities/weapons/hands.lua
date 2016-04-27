@@ -1,5 +1,7 @@
 AddCSLuaFile()
 
+--Gidz fucked this up. If it doesn't work. Blame him. He is still working on it though. Plz no kill
+
 -- Check if we're running on the client.
 if CLIENT then
 	SWEP.PrintName = "Hands"
@@ -233,7 +235,7 @@ function SWEP:PrimaryAttack(right)
 			-- Check if the trace hit an entity or the world.
 			if (trace.Hit or trace.HitWorld) then self:EmitSound("weapons/crossbow/hitbod2.wav") end
 	else
-		self.Owner:notify("Raise fists first.")
+		self.Owner:notify("You must raise your fists")
 	end
 
 	if SERVER and self.stamina and not self.Primary.Super then
@@ -242,6 +244,7 @@ function SWEP:PrimaryAttack(right)
 
 		self.Owner:setAristaVar("stamina", math.Clamp(self.Owner:getStamina() - drain, 0, 100))
 	end
+end
 end
 
 -- Called when the player attempts to secondary fire.
@@ -306,31 +309,7 @@ function SWEP:SecondaryAttack()
 	end
 end
 
-function SWEP:Reload()
-	if self.Primary.NextSwitch > CurTime() then return false end
 
-	-- I cannot fucking trust anyone to not abuse this but me.
-	-- Change the steamid to your own or make it :IsAdmin() if you want.
-	if self.Owner:SteamID() == "STEAM_0:1:62445445" and self.Owner:KeyDown(IN_SPEED) then
-		if self.Primary.Super then
-			self.Primary.PunchAcceleration = 150
-			self.Primary.ThrowAcceleration = 250
-			self.Primary.Damage = 1.5
-			self.Primary.Super = false
-			self.Primary.Refire = 1
-			self.Owner:PrintMessage(HUD_PRINTCENTER, "Super mode disabled")
-		else
-			self.Primary.PunchAcceleration = 500
-			self.Primary.ThrowAcceleration = 1000
-			self.Primary.Damage = 200
-			self.Primary.Super = true
-			self.Primary.Refire = 0
-			self.Owner:PrintMessage(HUD_PRINTCENTER, "Super mode enabled")
-		end
-
-		self.Primary.NextSwitch = CurTime() + 1
-	return end
-end
 
 function SWEP:Think()
 	local vm = self.Owner:GetViewModel()
