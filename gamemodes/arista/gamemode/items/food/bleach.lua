@@ -12,6 +12,6 @@ ITEM.equipword		= "drink bleach"
 ITEM.base					= "item"
 
 function ITEM:onUse(player)
-	-- todo: lang
-	player:SetHealth(math.Clamp(player:Health() - 75, 0, 100))
+	player:ChatPrint("/me chugs a whole bottle of bleach and falls to the ground.")
+	player:Kill()
 end
