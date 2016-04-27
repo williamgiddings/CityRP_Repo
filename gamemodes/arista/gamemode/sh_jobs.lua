@@ -19,7 +19,7 @@ TEAM_POLICEOFFICER = arista.team.add("Police Officer", {
 	},
 	cantuse = { -- Categories they are banned from using, eg, cops cant use explosives and illegal stuff.
 		CATEGORY_ILLEGAL_GOODS,
-		CATEGORY_ILLEGAL_WEAPONS,
+		CATEGORY_CIV_WEAPONS,
 		CATEGORY_EXPLOSIVES,
 	},
 	canmake = nil, -- Specific categories they CAN produce from the store.
@@ -73,7 +73,7 @@ TEAM_MAYOR = arista.team.add("Mayor", {
 		level = 1,
 		group = GROUP_OFFICIALS,
 	},
-	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_ILLEGAL_WEAPONS, CATEGORY_EXPLOSIVES},
+	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_CIV_WEAPONS, CATEGORY_EXPLOSIVES},
 })
 
 TEAM_VICEMAYOR = arista.team.add("Vice-Mayor", {
@@ -96,7 +96,7 @@ TEAM_VICEMAYOR = arista.team.add("Vice-Mayor", {
 		level = 1,
 		group = GROUP_OFFICIALS,
 	},
-	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_ILLEGAL_WEAPONS, CATEGORY_EXPLOSIVES},
+	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_CIV_WEAPONS, CATEGORY_EXPLOSIVES},
 })
 
 GANG_COBRA = arista.team.addGang(GROUP_OFFICIALS, "The Cobra", "models/player/riot.mdl", "Less talk, even more action!")
@@ -124,7 +124,7 @@ TEAM_COBRALEADER = arista.team.add("Cobra Leader", {
 		level = 1,
 		group = GROUP_OFFICIALS,
 	},
-	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_ILLEGAL_WEAPONS, CATEGORY_EXPLOSIVES},
+	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_CIV_WEAPONS, CATEGORY_EXPLOSIVES},
 })
 
 
@@ -151,7 +151,7 @@ TEAM_COBRA = arista.team.add("Cobra", {
 		level = 1,
 		group = GROUP_OFFICIALS,
 	},
-	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_ILLEGAL_WEAPONS, CATEGORY_EXPLOSIVES},
+	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_CIV_WEAPONS, CATEGORY_EXPLOSIVES},
 })
 
 TEAM_POLICECOMMANDER = arista.team.add("Police Commander", {
@@ -177,7 +177,7 @@ TEAM_POLICECOMMANDER = arista.team.add("Police Commander", {
 		level = 1,
 		group = GROUP_OFFICIALS,
 	},
-	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_ILLEGAL_WEAPONS, CATEGORY_EXPLOSIVES},
+	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_CIV_WEAPONS, CATEGORY_EXPLOSIVES},
 })
 
 TEAM_POLICEOFFICER = arista.team.add("Police Officer", {
@@ -203,7 +203,7 @@ TEAM_POLICEOFFICER = arista.team.add("Police Officer", {
 		level = 1,--2, -- not base group, but we dont have other jobs so for now
 		group = GROUP_OFFICIALS,
 	},
-	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_ILLEGAL_WEAPONS, CATEGORY_EXPLOSIVES},
+	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_CIV_WEAPONS, CATEGORY_EXPLOSIVES},
 })
 
 TEAM_SECRETARY = arista.team.add("Secretary", {
@@ -225,7 +225,7 @@ TEAM_SECRETARY = arista.team.add("Secretary", {
 		level = 1,
 		group = GROUP_OFFICIALS,
 	},
-	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_ILLEGAL_WEAPONS, CATEGORY_EXPLOSIVES},
+	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_CIV_WEAPONS, CATEGORY_EXPLOSIVES},
 })
 
 TEAM_FIREFIGHTER = arista.team.add("Fire Fighter", {
@@ -247,7 +247,7 @@ TEAM_FIREFIGHTER = arista.team.add("Fire Fighter", {
 		level = 1,
 		group = GROUP_OFFICIALS,
 	},
-	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_ILLEGAL_WEAPONS, CATEGORY_EXPLOSIVES},
+	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_CIV_WEAPONS, CATEGORY_EXPLOSIVES},
 })
 end
 
@@ -269,7 +269,24 @@ TEAM_CITIZEN = arista.team.add("Citizen", {
 		level = 1,
 		group = GROUP_CIVILIANS,
 	},
-	cantuse = {CATEGORY_ILLEGAL_WEAPONS, CATEGORY_EXPLOSIVES, CATEGORY_POLICE_WEAPONS},
+	cantuse = {CATEGORY_CIV_WEAPONS, CATEGORY_EXPLOSIVES, CATEGORY_POLICE_WEAPONS},
+})
+
+TEAM_ENGINEER = arista.team.add("Engineer", {
+	color = Color(25, 150, 25, 255),
+	description = "A specialist electrical engineer who has access to Wiremod",
+
+	salary = 650,
+	limit = 1,
+	access = "wpet",
+
+	group = {
+		gang = GANG_CIVILIANS,
+		access = "",
+		level = 1,
+		group = GROUP_CIVILIANS,
+	},
+	cantuse = {CATEGORY_CIV_WEAPONS, CATEGORY_EXPLOSIVES, CATEGORY_POLICE_WEAPONS},
 })
 
 TEAM_GUNDEAL = arista.team.add("Gun Dealer", {
@@ -277,7 +294,7 @@ TEAM_GUNDEAL = arista.team.add("Gun Dealer", {
 	description = "The owner of a gun store.",
 
 	salary = 220,
-  limit= 2,
+  	limit= 2,
 
 	access = "",
 
@@ -308,7 +325,7 @@ TEAM_CHEF = arista.team.add("Chef", {
 		group = GROUP_CIVILIANS,
 	},
 	canmake = {CATEGORY_VEHICLES, CATEGORY_FOOD, CATEGORY_ALCOHOL, CATEGORY_DRINKS},
-	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_ILLEGAL_WEAPONS, CATEGORY_EXPLOSIVES, CATEGORY_POLICE_WEAPONS},
+	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_CIV_WEAPONS, CATEGORY_EXPLOSIVES, CATEGORY_POLICE_WEAPONS},
 })
 end
 
@@ -331,22 +348,14 @@ TEAM_DOCTOR = arista.team.add("Doctor", {
 		group = GROUP_CIVILIANS,
 	},
 	canmake = {CATEGORY_VEHICLES, CATEGORY_DRUGS},
-	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_ILLEGAL_WEAPONS, CATEGORY_EXPLOSIVES, CATEGORY_POLICE_WEAPONS},
+	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_CIV_WEAPONS, CATEGORY_EXPLOSIVES, CATEGORY_POLICE_WEAPONS},
 })
 
 TEAM_MECHANIC = arista.team.add("Mechanic", {
 	color = Color(175, 175, 175, 255),
-<<<<<<< HEAD
-<<<<<<< HEAD
-	males = "models\mechanic\mechanic_m_01.mdl",
-    description = "Repairs damaged vehicles.",
-=======
-	males = "models\mechanic\mechanic_m_01.mdl"
-=======
+    	description = "Repairs damaged vehicles.",
 	males = "models/mechanic/mechanic_m_01.mdl",
->>>>>>> 8ca0190615a599e7ce3d6cfa0c72740f8c8fd9d0
   	description = "Repairs damaged vehicles.",
->>>>>>> 7851894edca830b42dc61879da2e5b1cdcc1bb8d
 
 	salary = 150,
 	limit = 2,
@@ -362,7 +371,7 @@ TEAM_MECHANIC = arista.team.add("Mechanic", {
 		group = GROUP_CIVILIANS,
 	},
 	canmake = {CATEGORY_VEHICLES},
-	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_ILLEGAL_WEAPONS, CATEGORY_EXPLOSIVES, CATEGORY_POLICE_WEAPONS},
+	cantuse = {CATEGORY_ILLEGAL_GOODS, CATEGORY_CIV_WEAPONS, CATEGORY_EXPLOSIVES, CATEGORY_POLICE_WEAPONS},
 })
 
 GROUP_UNDERGROUND	= arista.team.addGroup("The Underground", "Join the underground for more fun, but harsher treatment if caught.")
@@ -384,7 +393,7 @@ TEAM_BLACKMARKETDEALER = arista.team.add("Blackmarket Dealer", {
 		level = 1,
 		group = GROUP_UNDERGROUND,
 	},
-	canmake = {CATEGORY_VEHICLES, CATEGORY_EXPLOSIVES, CATEGORY_CONTRABAND, CATEGORY_POLICE_WEAPONS, CATEGORY_ILLEGAL_GOODS, CATEGORY_ILLEGAL_WEAPONS, CATEGORY_AMMO},
+	canmake = {CATEGORY_VEHICLES, CATEGORY_EXPLOSIVES, CATEGORY_CONTRABAND, CATEGORY_POLICE_WEAPONS, CATEGORY_ILLEGAL_GOODS, CATEGORY_CIV_WEAPONS, CATEGORY_AMMO},
 })
 
 TEAM_CHAV = arista.team.add("Chav", {
