@@ -8,4 +8,4 @@ ITEM.store				= true
 ITEM.description	= "39mm mid-range carbine with a 16'' barrel and a retractable stock."
 ITEM.ammo					= "5.56x45MM"
 ITEM.weaponType		= TYPE_LARGE
-ITEM.base					= "cw_base"
+ITEM.base					= "weapon"

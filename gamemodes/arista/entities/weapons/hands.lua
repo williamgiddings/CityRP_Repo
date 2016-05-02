@@ -70,29 +70,36 @@ SWEP.NoIronSightAttack = true
 SWEP.heldEnt = NULL
 
 --To determine holster--
-SWEP.raisedFists = false
+SWEP.NextHolster = 0
 
 -- Called when the SWEP is initialized.
 function SWEP:Initialize()
 	self.Primary.NextSwitch = CurTime()
 	self:SetWeaponHoldType("normal")
 	self.stamina = GAMEMODE:GetPlugin("stamina")
+	self.Owner:SetNetworkedBool("raisedFists", false)
 end
 
 if CLIENT then
 	CreateClientConVar("arista_drawhands", "1", true, true)
 end
 function SWEP:Deploy()
-	self:SetWeaponHoldType("normal")
-
-	local vm = self.Owner:GetViewModel()
-	vm:SendViewModelMatchingSequence(vm:LookupSequence("fists_draw"))
-
-	self:UpdateNextIdle()
-
-	if SERVER then vm:SetNoDraw(self.Owner:GetInfoNum("arista_drawhands", 1) and self.Owner:GetInfoNum("arista_drawhands", 1) == 0) end
+	
+	if (self.Owner:GetNetworkedBool("raisedFists") ==true) then
+		self:SetWeaponHoldType("fist")
+		local vm = self.Owner:GetViewModel()
+		vm:SendViewModelMatchingSequence(vm:LookupSequence("fists_draw"))
+		self:UpdateNextIdle()
+		if SERVER then vm:SetNoDraw(self.Owner:GetInfoNum("arista_drawhands", 1) and self.Owner:GetInfoNum("arista_drawhands", 1) == 0) end
+	else
+		self:SetWeaponHoldType("normal")
+		local vm = self.Owner:GetViewModel()
+		vm:SendViewModelMatchingSequence(vm:LookupSequence("fists_draw"))
+		self:UpdateNextIdle()
+		if SERVER then vm:SetNoDraw(self.Owner:GetInfoNum("arista_drawhands", 1) and self.Owner:GetInfoNum("arista_drawhands", 1) == 0)
+	end
 end
-
+end
 
 function SWEP:SetupDataTables()
 	self:NetworkVar("Float", 1, "NextIdle")
@@ -112,25 +119,34 @@ function SWEP:Reload()
 
 	local vm = self.Owner:GetViewModel()
 
-	if self.raiseFists == true then
-		vm:SetNoDraw(true)
-		self:SetWeaponHoldType("normal")
-		self.Owner:notify("You lower your fists...")
-		self.raiseFists = false
-	else
-		vm:SetNoDraw(false)
-		vm:SendViewModelMatchingSequence(vm:LookupSequence("fists_draw"))
-		self:SetWeaponHoldType("fist")
-		self.Owner:notify("You raise your fists...")
-		self.raiseFists = true
-	end
+	if CurTime() >= self.NextHolster then
+		if (self.Owner:GetNetworkedBool("raisedFists") ==true) then
+			vm:SetNoDraw(true)
+			self:SetWeaponHoldType("normal")
+			self.Owner:PrintMessage( HUD_PRINTCENTER, "You lower your fists" )
+			self.Owner:SetNetworkedBool("raisedFists", false)
+			self.NextHolster = CurTime() + 0.75
+		else
+			vm:SetNoDraw(false)
+			vm:SendViewModelMatchingSequence(vm:LookupSequence("fists_draw"))
+			self:SetWeaponHoldType("fist")
+			self.Owner:PrintMessage( HUD_PRINTCENTER, "You raise your fists" )
+			self.Owner:SetNetworkedBool("raisedFists", true)
+			self.NextHolster = CurTime() + 0.75
+		end
+	else return false
+end
 end
 
 function SWEP:PrimaryAttack(right)
-	if self.raiseFists == true then
+	
+	if (self.Owner:GetNetworkedBool("raisedFists") ==true) then
 		self:SetNextPrimaryFire(CurTime() + self.Primary.Refire)
 		self:SetNextSecondaryFire(CurTime() + self.Primary.Refire)
-	
+		
+		self:SendWeaponAnim( ACT_VM_PRIMARYATTACK )
+		self.Owner:SetAnimation( PLAYER_ATTACK1 )
+		
 		if IsValid(self.heldEnt)then
 			self:dropObject(self.Primary.ThrowAcceleration)
 	
@@ -234,78 +250,92 @@ function SWEP:PrimaryAttack(right)
 	
 			-- Check if the trace hit an entity or the world.
 			if (trace.Hit or trace.HitWorld) then self:EmitSound("weapons/crossbow/hitbod2.wav") end
-	else
+	
+	
+			if SERVER and self.stamina and not self.Primary.Super then
+				local drain = arista.config.plugins.staminaPunch
+				hook.Run("StaminaAdjustDrain", self.Owner, drain)
+
+				self.Owner:setAristaVar("stamina", math.Clamp(self.Owner:getStamina() - drain, 0, 100))
+			end
+	
+	
+	
+	elseif self.raiseFists == false then
 		self.Owner:notify("You must raise your fists")
 	end
 
-	if SERVER and self.stamina and not self.Primary.Super then
-		local drain = arista.config.plugins.staminaPunch
-		hook.Run("StaminaAdjustDrain", self.Owner, drain)
-
-		self.Owner:setAristaVar("stamina", math.Clamp(self.Owner:getStamina() - drain, 0, 100))
-	end
+	
 end
 end
 
 -- Called when the player attempts to secondary fire.
 function SWEP:SecondaryAttack()
-	self:SetNextSecondaryFire(CurTime() + 0.25)
-
-	if IsValid(self.heldEnt)then
-		self:dropObject()
-
-		return
-	end
-
-	-- Get a trace from the owner's eyes.
-	local trace = self.Owner:GetEyeTrace()
-	local ent = trace.Entity
-
-	-- Check the hit position of the trace to see if it's close to us.
-	if IsValid(ent) and self.Owner:GetPos():DistToSqr(trace.HitPos) <= range then
-		if arista.entity.isOwnable(ent) then
-			local vm = self.Owner:GetViewModel()
-			if vm and IsValid(vm) then
-				vm:SendViewModelMatchingSequence(vm:LookupSequence("fists_right"))
-
-				self:UpdateNextIdle()
-			end
-
-			if self.Owner:KeyDown(IN_SPEED) then
-				self:SetNextPrimaryFire(CurTime() + 0.75)
-				self:SetNextSecondaryFire(CurTime() + 0.75)
-
-				-- Keys!
-				if CLIENT then return end
-
-				if arista.entity.isOwnable(ent) and not ent:isJammed() then
-					if arista.entity.hasAccess(ent, self.Owner) then
-						trace.Entity:unLock()
-						trace.Entity:EmitSound("doors/door_latch3.wav")
-					else
-						self.Owner:notify("AL_CANNOT_NOACCESS")
-					end
-				end
-
-				return
-			elseif arista.entity.isDoor(ent) then
-				self:EmitSound("physics/wood/wood_crate_impact_hard2.wav")
-				if self.Primary.Super and SERVER and self.Owner:IsSuperAdmin() then
-					arista.entity.openDoor(ent, 0, true, true)
-				end
-
-				return
-			end
-		elseif ent:IsPlayer() or ent:IsNPC() or ent:GetClass() == "prop_ragdoll" and not self.Owner:KeyDown(IN_SPEED) then
-			self:PrimaryAttack(true)
-
-			self:SetNextPrimaryFire(CurTime() + self.Primary.Refire)
-			self:SetNextSecondaryFire(CurTime() + self.Primary.Refire)
+		
+	if (self.Owner:GetNetworkedBool("raisedFists") ==true) then	
+		self:SetNextSecondaryFire(CurTime() + 0.25)
+		self:SetNextPrimaryFire(CurTime() + self.Primary.Refire)
+		
+		self:SendWeaponAnim( ACT_VM_PRIMARYATTACK )
+		self.Owner:SetAnimation( PLAYER_ATTACK1 )
+		
+		if IsValid(self.heldEnt)then
+			self:dropObject()
 
 			return
 		end
 
-		self:pickUp(ent, trace)
+		-- Get a trace from the owner's eyes.
+		local trace = self.Owner:GetEyeTrace()
+		local ent = trace.Entity
+
+		-- Check the hit position of the trace to see if it's close to us.
+		if IsValid(ent) and self.Owner:GetPos():DistToSqr(trace.HitPos) <= range then
+			if arista.entity.isOwnable(ent) then
+				local vm = self.Owner:GetViewModel()
+				if vm and IsValid(vm) then
+					vm:SendViewModelMatchingSequence(vm:LookupSequence("fists_right"))
+
+					self:UpdateNextIdle()
+				end
+
+				if self.Owner:KeyDown(IN_SPEED) then
+					self:SetNextPrimaryFire(CurTime() + 0.75)
+					self:SetNextSecondaryFire(CurTime() + 0.75)
+
+					-- Keys!
+					if CLIENT then return end
+
+					if arista.entity.isOwnable(ent) and not ent:isJammed() then
+						if arista.entity.hasAccess(ent, self.Owner) then
+							trace.Entity:unLock()
+							trace.Entity:EmitSound("doors/door_latch3.wav")
+						else
+							self.Owner:notify("AL_CANNOT_NOACCESS")
+						end
+					end
+
+					return
+				elseif arista.entity.isDoor(ent) then
+					self:EmitSound("physics/wood/wood_crate_impact_hard2.wav")
+					if self.Primary.Super and SERVER and self.Owner:IsSuperAdmin() then
+						arista.entity.openDoor(ent, 0, true, true)
+					end
+
+					return
+				end
+			elseif ent:IsPlayer() or ent:IsNPC() or ent:GetClass() == "prop_ragdoll" and not self.Owner:KeyDown(IN_SPEED) then
+				self:PrimaryAttack(true)
+
+				self:SetNextPrimaryFire(CurTime() + self.Primary.Refire)
+				self:SetNextSecondaryFire(CurTime() + self.Primary.Refire)
+
+				return
+			end
+
+			self:pickUp(ent, trace)
+		end
+		
 	end
 end
 

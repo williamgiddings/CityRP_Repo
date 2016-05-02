@@ -8,4 +8,4 @@ ITEM.store				= true
 ITEM.description	= "Vercatile submachine gun chambered for 9x19mm (.40) parabellum."
 ITEM.ammo					= "9x19MM"
 ITEM.weaponType		= TYPE_LARGE
-ITEM.base					= "cw_base"
+ITEM.base					= "weapon"

@@ -8,4 +8,4 @@ ITEM.store				= true
 ITEM.description	= "Tough and reliable 39mm assualt rifle."
 ITEM.ammo					= "5.45x39MM"
 ITEM.weaponType		= TYPE_LARGE
-ITEM.base					= "cw_base"
+ITEM.base					= "weapon"

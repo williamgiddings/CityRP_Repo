@@ -8,4 +8,4 @@ ITEM.store				= true
 ITEM.description	= "A .38 double-action revolver."
 ITEM.ammo					= ".44 Magnum"
 ITEM.weaponType		= TYPE_SMALL
-ITEM.base					= "cw_base"
+ITEM.base					= "weapon"

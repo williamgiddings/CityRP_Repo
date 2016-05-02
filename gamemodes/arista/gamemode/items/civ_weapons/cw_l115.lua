@@ -8,4 +8,4 @@ ITEM.store				= true
 ITEM.description	= "Long-range, bolt action, Arctic Warfare Magnum; Chambered for .338 ."
 ITEM.ammo					= ".338 Lapua"
 ITEM.weaponType		= TYPE_LARGE
-ITEM.base					= "cw_base"
+ITEM.base					= "weapon"

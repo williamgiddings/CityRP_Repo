@@ -12,6 +12,6 @@ ITEM.equipword		= "drink bleach"
 ITEM.base					= "item"
 
 function ITEM:onUse(player)
-	player:ChatPrint("/me chugs a whole bottle of bleach and falls to the ground.")
+	player:ChatPrint("chugs a whole bottle of bleach and falls to the ground.")
 	player:Kill()
 end
